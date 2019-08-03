@@ -1,5 +1,6 @@
 package org.fasttrackit;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ public class RegisterTest {
 
     @Test
 
-    public void negativePasswordLoginTest() {
+    public void registerTest() {
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://fasttrackit.org/selenium-test/");
@@ -28,7 +29,8 @@ public class RegisterTest {
         driver.findElement(By.cssSelector("#confirmation")).sendKeys("matteo");
         driver.findElement(By.cssSelector("#is_subscribed")).sendKeys("matteo");
         driver.findElement(By.cssSelector("#form-validate > div.buttons-set > button > span > span")).click();
-
+        WebElement errormessage = driver.findElement(By.xpath("//span[contains(text(),'There is already an account ')]"));
+        Assert.assertTrue(errormessage.isDisplayed());
         driver.quit();
     }
 }

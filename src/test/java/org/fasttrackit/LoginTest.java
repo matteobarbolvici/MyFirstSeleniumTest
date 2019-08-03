@@ -1,5 +1,6 @@
 package org.fasttrackit;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,10 @@ public class LoginTest {
         driver.findElement(By.cssSelector("#email")).sendKeys("matteozalau_ro@yahoo.com");
         driver.findElement(By.cssSelector("#pass")).sendKeys("matteo");
         driver.findElement(By.cssSelector("#send2")).click();
-
+        WebElement account = driver.findElement(By.xpath("//a/span[text()='Account']"));
+        account.click();
+        WebElement logout = driver.findElement(By.xpath("//a[text()='Log Out']"));
+        Assert.assertTrue(logout.isDisplayed());
         driver.quit();
     }
 
@@ -41,7 +45,8 @@ public class LoginTest {
         driver.findElement(By.cssSelector("#email")).sendKeys("matteozalau_ro@yahoo.com");
         driver.findElement(By.cssSelector("#pass")).sendKeys("125546dscqw2");
         driver.findElement(By.cssSelector("#send2")).click();
-
+        WebElement errorMsg = driver.findElement(By.xpath("//span[contains(text(),'Invalid login or password')]"));
+        Assert.assertTrue(errorMsg.isDisplayed());
         driver.quit();
     }
 
@@ -59,13 +64,11 @@ public class LoginTest {
        driver.findElement(By.cssSelector("#email")).sendKeys("matteozalau_royahoo.com");
        driver.findElement(By.cssSelector("#pass")).sendKeys("matteo");
        driver.findElement(By.cssSelector("#send2")).click();
-
+       WebElement errorMsg = driver.findElement(By.xpath("//p[contains(text(),'* Required Fields')]"));
+       Assert.assertTrue(errorMsg.isDisplayed());
        driver.quit();
    }
-
-
-
-            }
+}
 
 
 
